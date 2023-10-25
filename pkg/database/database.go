@@ -13,12 +13,14 @@ import (
 var DB *mongo.Client
 
 func Connect() {
+	log.Println("Connecting to MongoDB...")
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 	clientOptions := options.Client().ApplyURI(config.AppConfig.MongoURL)
 	client, err := mongo.Connect(ctx, clientOptions)
 	if err != nil {
 		log.Fatal(err)
 	}
+	log.Println("Connected to MongoDB!")
 	DB = client
 }
 
